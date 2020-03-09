@@ -1,0 +1,41 @@
+<nz-card [nzBordered]="false" nzTitle="">
+
+<nz-divider nzText="总包"></nz-divider>
+<div nz-row [nzGutter]="gutter">
+  <div nz-col class="gutter-row" [nzSpan]="24 / 4" *ngFor="let i of generateArray(7); let idx=index">
+    <div class="grid-config">总包模板 - {{idx + 1}}</div>
+  </div>
+</div>
+
+<nz-divider nzText="分包"></nz-divider>
+<div nz-row [nzGutter]="gutter">
+  <div nz-col class="gutter-row" [nzSpan]="24 / 4" *ngFor="let i of generateArray(5); let idx=index">
+    <div class="grid-config">分包模板 - {{idx + 1}}</div>
+  </div>
+</div>
+
+
+<nz-divider nzText="劳务外包"></nz-divider>
+<div nz-row [nzGutter]="gutter">
+  <div nz-col class="gutter-row" [nzSpan]="24 / 4" *ngFor="let i of generateArray(3); let idx=index">
+    <div class="grid-config">劳务模板 - {{idx + 1}}</div>
+  </div>
+</div>
+
+
+<nz-divider nzText="设备采购"></nz-divider>
+<div nz-row [nzGutter]="gutter">
+  <div nz-col class="gutter-row" [nzSpan]="24 / 4" *ngFor="let i of generateArray(4); let idx=index">
+    <div class="grid-config">设备采购模板 - {{idx + 1}}</div>
+  </div>
+</div>
+
+
+<nz-divider nzText="物资采购"></nz-divider>
+<div nz-row [nzGutter]="gutter">
+  <div nz-col class="gutter-row" [nzSpan]="24 / 4" *ngFor="let i of generateArray(6); let idx=index">
+    <div class="grid-config">物资采购模板 - {{idx + 1}}</div>
+  </div>
+</div>
+
+</nz-card>

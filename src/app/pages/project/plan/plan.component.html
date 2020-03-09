@@ -1,0 +1,37 @@
+<nz-table #expandTable [nzData]="listOfMapData">
+  <thead>
+  <tr>
+    <th nzWidth="25%">任务</th>
+    <th nzWidth="10%">人天</th>
+    <th nzWidth="15%">计划完工</th>
+    <th nzWidth="10%">更新人</th>
+    <th nzWidth="15%">更新时间</th>
+    <th nzWidth="10%">当前状态</th>
+    <th nzWidth="10%">附件</th>
+  </tr>
+  </thead>
+  <tbody>
+  <ng-container *ngFor="let data of expandTable.data">
+    <ng-container *ngFor="let item of mapOfExpandedData[data.key]">
+      <tr *ngIf="(item.parent && item.parent.expand) || !item.parent" [ngClass]="item.status">
+        <td
+          [nzIndentSize]="item.level * 20"
+          [nzShowExpand]="!!item.children"
+          [(nzExpand)]="item.expand"
+          (nzExpandChange)="collapse(mapOfExpandedData[data.key], item, $event)"
+        >
+          {{ item.name }}
+        </td>
+        <td>{{ item.mandays }}</td>
+        <td>{{ item.planDate }}</td>
+        <td>{{ item.updateUser }}</td>
+        <td>{{ item.updateDate }}</td>
+        <td>{{ statusName(item.status) }}</td>
+        <td>
+          <span *ngIf="item.attachmet != ''"><a>{{ item.attachment }}</a></span>
+        </td>
+      </tr>
+    </ng-container>
+  </ng-container>
+  </tbody>
+</nz-table>

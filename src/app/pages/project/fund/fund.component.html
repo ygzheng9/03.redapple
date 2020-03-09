@@ -1,0 +1,59 @@
+
+
+
+<nz-row [nzGutter]="16">
+  <nz-col [nzSpan]="8">
+    <nz-statistic [nzValue]="200 | number" [nzTitle]="'资金平衡(万)'"></nz-statistic>
+  </nz-col>
+  <nz-col [nzSpan]="8">
+    <nz-statistic [nzValue]="800 | number: '1.0-2'" [nzTitle]="'资金在途(万)'"></nz-statistic>
+  </nz-col>
+  <nz-col [nzSpan]="8">
+    <nz-statistic [nzValue]="-300 | number: '1.0-2'" [nzTitle]="'后两月预测(万)'" [nzValueStyle]="{ color: 'red' }"></nz-statistic>
+  </nz-col>
+</nz-row>
+
+<nz-divider nzText=""></nz-divider>
+
+<div nz-row [nzGutter]="16">
+  <div nz-col class="gutter-row" [nzSpan]="8">
+    <h5>计划</h5>
+    <nz-timeline>
+      <div *ngFor="let i of contractInfos">
+        <nz-timeline-item [nzColor]="i.bizType == 'in' ? 'green' : 'red'" >
+          <span [ngClass] = "i.bizType == 'in' ? ( i.status == 'pending' ? 'pending' : 'in') : 'out'">
+          {{i.title}}
+          </span>
+        </nz-timeline-item>
+      </div>
+    </nz-timeline>
+  </div>
+  <div nz-col class="gutter-row" [nzSpan]="8">
+    <h5>发票</h5>
+    <nz-timeline>
+      <div *ngFor="let i of invoiceInfos">
+        <nz-timeline-item [nzColor]="i.bizType == 'in' ? 'green' : 'red'" >
+          <span [ngClass] = "i.bizType == 'in' ? ( i.status == 'pending' ? 'pending' : 'in') : 'out'">
+          {{i.title}}
+          </span>
+        </nz-timeline-item>
+      </div>
+    </nz-timeline>
+  </div>
+  <div nz-col class="gutter-row" [nzSpan]="8">
+    <h5>资金</h5>
+    <nz-timeline nzMode="left">
+      <div *ngFor="let i of fundInfos">
+        <nz-timeline-item [nzColor]="i.bizType == 'in' ? 'green' : 'red'" >
+          <span [ngClass] = "i.bizType == 'in' ? ( i.status == 'pending' ? 'pending' : 'in') : 'out'">
+          {{i.title}}
+          </span>
+        </nz-timeline-item>
+      </div>
+    </nz-timeline>
+  </div>
+</div>
+
+<ng-template #dotTemplate>
+  <i nz-icon nzType="clock-circle-o" style="font-size: 16px;"></i>
+</ng-template>

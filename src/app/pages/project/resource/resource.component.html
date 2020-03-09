@@ -1,0 +1,40 @@
+<nz-descriptions nzTitle="" nzBordered>
+  <nz-descriptions-item nzTitle="项目经理">万德福</nz-descriptions-item>
+  <nz-descriptions-item nzTitle="技术负责人">章北海</nz-descriptions-item>
+  <nz-descriptions-item nzTitle="工地负责人">罗辑</nz-descriptions-item>
+  <nz-descriptions-item nzTitle="物资组长">泰瑞宝</nz-descriptions-item>
+  <nz-descriptions-item nzTitle="机械组长">汪淼</nz-descriptions-item>
+  <nz-descriptions-item nzTitle="质检组长">杨东</nz-descriptions-item>
+  <nz-descriptions-item nzTitle="财务组长">史强</nz-descriptions-item>
+  <nz-descriptions-item nzTitle="实验室主任">叶文杰</nz-descriptions-item>
+  <nz-descriptions-item nzTitle="后勤保卫组长">云天明</nz-descriptions-item>
+</nz-descriptions>
+
+<div echarts [options]="chartOption" class="demo-chart"></div>
+
+<nz-divider nzText="明细"></nz-divider>
+
+<nz-calendar  [(ngModel)]="selectedValue"  nzMode="month">
+  <ul *nzDateCell="let date" class="events">
+    <ng-container [ngSwitch]="date.getDate()">
+      <ng-container *ngSwitchCase="8">
+          <span class="danger" nz-tooltip nzTooltipTitle="紧急抢修">
+            200
+          </span>
+      </ng-container>
+      <ng-container *ngSwitchCase="20">
+        <span class="danger" nz-tooltip nzTooltipTitle="物资到货，赶进度">
+            160
+          </span>
+      </ng-container>
+      <ng-container *ngSwitchCase="25">
+        <span class="danger" nz-tooltip nzTooltipTitle="工作区设备故障">
+            76
+          </span>
+      </ng-container>
+      <ng-container *ngSwitchDefault>
+        <nz-badge nzStatus="success" [nzText]="getDays(date.getDate())"></nz-badge>
+      </ng-container>
+    </ng-container>
+  </ul>
+</nz-calendar>

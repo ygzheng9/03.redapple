@@ -1,0 +1,11 @@
+#segmentTable {
+  font-size: 12px;
+}
+
+tr.selected, a.selected {
+  background-color: hsl(0, 0%, 86%);
+}
+
+.hidden {
+  display: none;
+}

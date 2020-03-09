@@ -1,0 +1,101 @@
+<nz-divider nzText="客户合同"></nz-divider>
+<nz-table #customerTable [nzData]="customerContracts">
+  <thead>
+  <tr>
+    <th nzWidth="15%">项目号</th>
+    <th>项目名称</th>
+    <th>类型</th>
+    <th>签约日期</th>
+    <th>甲方</th>
+    <th>金额</th>
+    <th>备注</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of customerTable.data ">
+    <td>{{ data.num }}</td>
+    <td>{{ data.name }}</td>
+    <td>{{ data.bizType }}</td>
+    <td>{{ data.signDate }}</td>
+    <td>{{ data.firstParty }}</td>
+    <td>
+      <a (click)="showModal('client', data)">{{ data.amount }}</a>
+    </td>
+    <td>{{ data.remark }}</td>
+  </tr>
+  </tbody>
+</nz-table>
+
+<nz-divider nzText="下包合同"></nz-divider>
+<nz-table #subTable [nzData]="subContracts">
+  <thead>
+  <tr>
+    <th nzWidth="15%">项目号</th>
+    <th>项目名称</th>
+    <th>类型</th>
+    <th>签约日期</th>
+    <th>乙方</th>
+    <th>金额</th>
+    <th>备注</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of subTable.data">
+    <td>{{ data.num }}</td>
+    <td>{{ data.name }}</td>
+    <td>{{ data.bizType }}</td>
+    <td>{{ data.signDate }}</td>
+    <td>{{ data.secondParty }}</td>
+    <td><a (click)="showModal('sub', data)">{{ data.amount }}</a></td>
+    <td>{{ data.remark }}</td>
+  </tr>
+  </tbody>
+</nz-table>
+
+<nz-modal [(nzVisible)]="isVisible" nzTitle="付款计划" nzWidth="800"
+          (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+
+  <nz-descriptions nzTitle="">
+    <nz-descriptions-item nzTitle="项目号">{{ currContract.num }}</nz-descriptions-item>
+    <nz-descriptions-item nzTitle="项目名称">{{ currContract.name }}</nz-descriptions-item>
+  </nz-descriptions>
+
+  <nz-table #milestonesTable [nzData]="milestones" [nzShowPagination] = "false">
+    <thead>
+    <tr>
+      <th>编号</th>
+      <th>里程碑</th>
+      <th>计划时间</th>
+      <th>金额</th>
+      <th>发票</th>
+      <th>资金</th>
+      <th>备注</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let data of milestonesTable.data">
+      <td>{{ data.num }}</td>
+      <td>{{ data.name }}</td>
+      <td>{{ data.planDate }}</td>
+      <td>{{ data.amount }}</td>
+      <td>
+        <div *ngIf="data.billed === 'done'">
+          <i nz-icon nzType="check" nzTheme="outline" class="done"></i>
+        </div>
+        <div *ngIf="data.billed === 'delayed'">
+          <i nz-icon nzType="flag" nzTheme="outline" class="delayed"></i>
+        </div>
+      <td>
+        <div *ngIf="data.cleared === 'done'">
+          <i nz-icon nzType="check" nzTheme="outline" class="done"></i>
+        </div>
+        <div *ngIf="data.cleared === 'delayed'">
+          <i nz-icon nzType="flag" nzTheme="outline" class="delayed"></i>
+        </div>
+      </td>
+      <td>{{ data.remark }}</td>
+
+    </tr>
+    </tbody>
+  </nz-table>
+</nz-modal>

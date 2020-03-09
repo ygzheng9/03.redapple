@@ -1,0 +1,55 @@
+<nz-card [nzBordered]="false" nzTitle="">
+<div echarts [options]="chartOption" class="mainChart"></div>
+</nz-card>
+
+<nz-card [nzBordered]="false" nzTitle="项目清单">
+
+  <nz-table #nzTable [nzData]="listOfDisplayData">
+    <thead>
+    <tr>
+      <th nzCustomFilter>
+        项目号
+        <i
+          nz-th-extra
+          class="ant-table-filter-icon"
+          nz-icon
+          nz-dropdown
+          #dropdown="nzDropdown"
+          nzType="search"
+          [nzDropdownMenu]="menu"
+          [class.ant-table-filter-open]="dropdown.nzVisible"
+          nzTrigger="click"
+          nzPlacement="bottomRight"
+          [nzClickHide]="false"
+          nzTableFilter
+        ></i>
+      </th>
+      <th>项目名称</th>
+      <th>甲方</th>
+      <th>乙方</th>
+      <th>金额(万)</th>
+      <th nzShowFilter [nzFilters]="listOfFilterAddress" (nzFilterChange)="filterAddressChange($event)">项目地址</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let data of nzTable.data">
+      <td><a href="#" routerLink="../detail"> {{ data.num }} </a></td>
+      <td>{{ data.name }}</td>
+      <td>{{ data.firstParty }}</td>
+      <td>{{ data.secondParty }}</td>
+      <td>{{ data.amount }}</td>
+      <td>{{ data.address }}</td>
+    </tr>
+    </tbody>
+  </nz-table>
+</nz-card>
+
+<nz-dropdown-menu #menu="nzDropdownMenu">
+  <div class="search-box">
+    <input type="text" nz-input placeholder="Search name" [(ngModel)]="searchValue" />
+    <button nz-button nzSize="small" nzType="primary" (click)="search()" class="search-button">
+      查找
+    </button>
+    <button nz-button nzSize="small" (click)="reset()">重置</button>
+  </div>
+</nz-dropdown-menu>
