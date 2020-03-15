@@ -1,0 +1,122 @@
+<nz-tabset>
+  <nz-tab nzTitle="待接单">
+    <nz-table #openTable [nzData]="openItems" nzSize="middle" nzFrontPagination="false">
+      <thead>
+      <tr>
+        <th>单号</th>
+        <th>下单时间</th>
+        <th>采购员</th>
+        <th>采购金额</th>
+        <th>要求日期</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let data of openTable.data">
+        <td>{{ data.orderNum }}</td>
+        <td>{{ data.placeDate }}</td>
+        <td>{{ data.buyer }}</td>
+        <td>{{ data.orderAmt }}</td>
+        <td>{{ data.requireDate }}</td>
+      </tr>
+      </tbody>
+    </nz-table>
+  </nz-tab>
+  <nz-tab nzTitle="待发货">
+    <nz-table #confirmTable [nzData]="confirmItems" nzSize="middle" nzFrontPagination="false">
+      <thead>
+      <tr>
+        <th>单号</th>
+        <th>下单时间</th>
+        <th>采购金额</th>
+        <th>要求日期</th>
+        <th>确认人</th>
+        <th>确认日期</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let data of confirmTable.data">
+        <td>{{ data.orderNum }}</td>
+        <td>{{ data.placeDate }}</td>
+        <td>{{ data.orderAmt }}</td>
+        <td>{{ data.requireDate }}</td>
+        <td>{{ data.confirmBy }}</td>
+        <td>{{ data.confirmDate }}</td>
+      </tr>
+      </tbody>
+    </nz-table>
+  </nz-tab>
+  <nz-tab nzTitle="待收货">
+    <nz-table #shipTable [nzData]="shipItems" nzSize="middle" nzFrontPagination="false">
+      <thead>
+      <tr>
+        <th>单号</th>
+        <th>下单时间</th>
+        <th>采购金额</th>
+        <th>要求日期</th>
+        <th>发货日期</th>
+        <th>承运方</th>
+        <th>运单号</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let data of shipTable.data">
+        <td>{{ data.orderNum }}</td>
+        <td>{{ data.placeDate }}</td>
+        <td>{{ data.orderAmt }}</td>
+        <td>{{ data.requireDate }}</td>
+        <td>{{ data.outDate }}</td>
+        <td>{{ data.shipper }}</td>
+        <td>{{ data.shipOrder }}</td>
+      </tr>
+      </tbody>
+    </nz-table>
+  </nz-tab>
+  <nz-tab nzTitle="待开票">
+    <nz-table #billTable [nzData]="billItems" nzSize="middle" nzFrontPagination="false">
+      <thead>
+      <tr>
+        <th>单号</th>
+        <th>下单时间</th>
+        <th>采购金额</th>
+        <th>采购员</th>
+        <th>收货日期</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let data of billTable.data">
+        <td>{{ data.orderNum }}</td>
+        <td>{{ data.placeDate }}</td>
+        <td>{{ data.orderAmt }}</td>
+        <td>{{ data.buyer }}</td>
+        <td>{{ data.receiveDate }}</td>
+      </tr>
+      </tbody>
+    </nz-table>
+  </nz-tab>
+  <nz-tab nzTitle="待付款">
+    <nz-table #invTable [nzData]="invItems" nzSize="middle" nzFrontPagination="false">
+      <thead>
+      <tr>
+        <th>发票号</th>
+        <th>发票类型</th>
+        <th>税率</th>
+        <th>总额</th>
+        <th>发票日期</th>
+        <th>登记日期</th>
+        <th>登记人</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let data of invTable.data">
+        <td>{{ data.invNum }}</td>
+        <td>{{ data.invType }}</td>
+        <td>{{ data.taxRate }}</td>
+        <td>{{ data.invAmt }}</td>
+        <td>{{ data.invDate }}</td>
+        <td>{{ data.receiveDate }}</td>
+        <td>{{ data.receiveBy }}</td>
+      </tr>
+      </tbody>
+    </nz-table>
+  </nz-tab>
+</nz-tabset>

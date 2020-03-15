@@ -1,36 +1,26 @@
 <div class="container">
 
-  <div class="title" (click)="switchMode()">提单数据统计</div>
+  <div class="title" (click)="switchMode()">订单数据统计</div>
 
   <hr>
 
   <div [ngClass]="{hidden: !showDailySales}">
-    <div class="columns">
-      <div class="column is-2">
-        <nz-date-picker [(ngModel)]="startDate" required ></nz-date-picker>
-      </div>
-      <div class="column is-3">
+    <div nz-row>
+      <div nz-col nzSpan="24">
         <nz-range-picker [(ngModel)]="searchRange" required ></nz-range-picker>
-      </div>
-      <div class="column is-1">
-        <a class="button is-primary">
-          <span class="icon">
-            <i class="fa fa-github"></i>
-          </span>
-          <span>查询</span>
-        </a>
+        <button nz-button nzType="default"><i nz-icon nzType="search"></i>查找</button>
       </div>
     </div>
-    <div class="columns" >
-      <div class="column">
+
+    <div nz-row >
+      <div nz-col>
         <canvas #lineChart>Loading....</canvas>
       </div>
     </div>
-
   </div>
 
-  <div class="columns" [ngClass]="{hidden: showDailySales}">
-    <div class="column is-3">
+  <div nz-row  nzGutter="16"  [ngClass]="{hidden: showDailySales}">
+    <div nz-col nzSpan="8">
       <div class="tabs">
         <ul>
           <li (click)="switchChart('doughnut')"
@@ -40,16 +30,16 @@
         </ul>
       </div>
       <div>
-        <canvas id='myChart' height="350px"></canvas>
+        <canvas id='myChart' height="250px"></canvas>
       </div>
     </div>
 
-    <div class="column is-1">
+    <div nz-col nzOffset="1" nzSpan="3">
       <table class="table is-narrow" id="segmentTable">
         <thead>
         <tr>
-          <th>提单</th>
-          <th>客户</th>
+          <th>订单</th>
+          <th>供应商</th>
         </tr>
         </thead>
         <tbody>
@@ -62,10 +52,10 @@
       </table>
     </div>
 
-    <div class="column" *ngIf="hasSelectedSegment();">
+    <div nz-col nzSpan="12" *ngIf="hasSelectedSegment();" [ngClass]="{'hidden': showDetails}">
         <nav class="panel" >
           <p class="panel-heading">
-            {{ selectedSegment }} 张提单的客户
+            {{ selectedSegment }} 张订单的供应商
           </p>
           <div class="panel-block">
             <p class="control has-icon">
@@ -79,8 +69,8 @@
             </p>
           </div>
 
-          <div style="height: 400px;">
-            <div style="overflow-y:auto;max-height: 400px;" >
+          <div style="height: 300px;">
+            <div style="overflow-y:auto;max-height: 300px;" >
               <a class="panel-block"
                  *ngFor="let customer of filteredCustomer; let i = index;"
                  (click)="drillByCust(customer)"
@@ -92,30 +82,35 @@
         </nav>
     </div>
 
-    <div class="column" *ngIf="hasSelectedCustomer();">
-      <article class="message">
-        <div class="message-body">
-          {{ selectedCustomer }}
+    <div nz-col  nzSpan="12" [ngClass]="{'hidden': !showDetails}">
+      <nav class="panel" >
+        <p class="panel-heading" (click)="backToList()">
+            <i nz-icon nzType="arrow-left" nzTheme="outline"></i>
+            {{ selectedCustomer }}
+        </p>
+
+        <div style="height: 300px;">
+          <div style="overflow-y:auto;max-height: 300px;" >
+            <table class="table is-narrow" id="blTable">
+              <thead>
+              <tr>
+                <th>#</th>
+                <th>日期</th>
+                <th>订单号</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let itm of details; let i = index;">
+                <td>{{ i+1 }}</td>
+                <td>{{ itm.biz_date }}</td>
+                <td>{{ itm.bl_num }}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
-      </article>
-      <table class="table is-narrow" id="blTable">
-        <thead>
-        <tr>
-          <th>#</th>
-          <th>日期</th>
-          <th>提单号</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let itm of details; let i = index;">
-          <td>{{ i+1 }}</td>
-          <td>{{ itm.bizDate }}</td>
-          <td>{{ itm.blNumber }}</td>
-        </tr>
-        </tbody>
-      </table>
+      </nav>
     </div>
   </div>
-
 
 </div>

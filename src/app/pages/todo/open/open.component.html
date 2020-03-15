@@ -1,0 +1,113 @@
+<span class="add">
+  <button nz-button nzType="default" nzShape="circle" (click)="showModal()"><i nz-icon nzType="plus"></i></button>
+</span>
+
+<div *ngFor="let grp of groupTasks">
+  <nz-divider [nzText]="grp.title" nzOrientation="left" [ngClass]="grp.status"></nz-divider>
+  <nz-table #basicTable [nzData]="grp.items" nzSize="middle" nzFrontPagination="false">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>事项</th>
+      <th>来源</th>
+      <th>责任人</th>
+      <th>要求日期</th>
+      <th>指派日期</th>
+      <th>状态</th>
+      <th>更新日期</th>
+      <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let data of basicTable.data">
+      <td>{{ data.key }}</td>
+      <td>{{ data.description }}</td>
+      <td>{{ data.refBiz }}</td>
+      <td>{{ data.owner }}</td>
+      <td>{{ data.planDate }}</td>
+      <td>{{ data.assignDate }}</td>
+      <td>{{ statusName(data.updateStatus) }}</td>
+      <td>{{ data.updateDate }}</td>
+      <td>
+        <a>关闭</a>
+      </td>
+    </tr>
+    </tbody>
+  </nz-table>
+</div>
+
+
+<nz-modal [(nzVisible)]="isVisible" nzTitle="任务明细" nzWidth="800"
+          (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()"
+          [nzFooter]="null">
+
+<form nz-form [formGroup]="entryForm" (ngSubmit)="_submitForm()" [nzLayout]="'vertical'">
+    <nz-row nzGutter="16">
+      <nz-col nzLg="6" nzMd="12" nzSm="24">
+        <nz-form-item>
+          <nz-form-label>关键字</nz-form-label>
+          <nz-form-control nzErrorTip="请输入任务关键字">
+            <input nz-input formControlName="keyword" placeholder="" />
+          </nz-form-control>
+        </nz-form-item>
+      </nz-col>
+      <nz-col [nzXl]="{ span: 6, offset: 2 }" [nzLg]="{ span: 8 }" [nzMd]="{ span: 12 }" nzSm="24">
+        <nz-form-item>
+          <nz-form-label>任务描述</nz-form-label>
+          <nz-form-control nzErrorTip="请输入任务描述">
+            <textarea nz-input formControlName="description" [nzAutosize]="true" placeholder=""></textarea>
+          </nz-form-control>
+        </nz-form-item>
+      </nz-col>
+      <nz-col [nzXl]="{ span: 8, offset: 2 }" [nzLg]="{ span: 10 }" [nzMd]="{ span: 24 }" nzSm="24">
+        <nz-form-item>
+          <nz-form-label>提报人</nz-form-label>
+          <nz-form-control nzErrorTip="请选择提报人">
+            <nz-select formControlName="from" [nzPlaceHolder]="'请选择执行人'" [nzShowSearch]="true">
+              <nz-option *ngFor="let i of users" [nzLabel]="i.label" [nzValue]="i.value"> </nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </nz-col>
+    </nz-row>
+    <nz-row nzGutter="16">
+      <nz-col nzLg="6" nzMd="12" nzSm="24">
+        <nz-form-item>
+          <nz-form-label>责任人</nz-form-label>
+          <nz-form-control nzErrorTip="请选择责任人">
+            <nz-select formControlName="owner" [nzPlaceHolder]="'请选择责任人'" [nzShowSearch]="true">
+              <nz-option *ngFor="let i of users" [nzLabel]="i.label" [nzValue]="i.value"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </nz-col>
+      <nz-col [nzXl]="{ span: 6, offset: 2 }" [nzLg]="{ span: 8 }" [nzMd]="{ span: 12 }" nzSm="24">
+        <nz-form-item>
+          <nz-form-label>要求时间</nz-form-label>
+          <nz-form-control>
+            <nz-date-picker formControlName="planDate"></nz-date-picker>
+          </nz-form-control>
+        </nz-form-item>
+      </nz-col>
+      <nz-col [nzXl]="{ span: 8, offset: 2 }" [nzLg]="{ span: 10 }" [nzMd]="{ span: 24 }" nzSm="24">
+        <nz-form-item>
+          <nz-form-label>任务类型</nz-form-label>
+          <nz-form-control nzErrorTip="请选择任务类型">
+            <nz-select formControlName="taskType" [nzShowSearch]="true" [nzPlaceHolder]="'请选择任务类型'">
+              <nz-option [nzLabel]="'私密'" [nzValue]="'private'"></nz-option>
+              <nz-option [nzLabel]="'公开'" [nzValue]="'public'"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </nz-col>
+    </nz-row>
+    <nz-form-item nz-row>
+      <nz-form-control [nzSpan]="14" [nzOffset]="10">
+        <button nz-button nzType="default">保存</button>
+        <button nz-button (click)="handleCancel()">取消</button>
+      </nz-form-control>
+    </nz-form-item>
+
+</form>
+
+</nz-modal>

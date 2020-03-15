@@ -33,6 +33,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/bulma/css/bulma.css",
               "./node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
               "src/styles.less"
             ],
@@ -106,6 +107,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/bulma/css/bulma.css",
               "./node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
               "src/styles.less"
             ],

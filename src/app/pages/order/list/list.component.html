@@ -1,4 +1,7 @@
-<h1>Breweries</h1>
+<div *ngIf="!brews">
+  <h1>Loading Breweries.....</h1>
+</div>
+
 
 <ul *ngIf="brews">
   <li *ngFor="let brew of brews">

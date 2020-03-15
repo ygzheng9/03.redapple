@@ -9,7 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class HomeComponent implements OnInit {
   rForm: FormGroup;
-  post:any;                     // A property for our submitted form
+  post:any;                     // A property for our submitted entryForm
   description:string = '';
   name:string = '';
 

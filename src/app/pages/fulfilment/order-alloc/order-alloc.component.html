@@ -1,0 +1,54 @@
+<div nz-row>
+  <div nz-col nzSpan="3">
+    <button nz-button nzType="" (click)="cancelAlloc()">取消分配</button>
+  </div>
+
+  <div nz-col nzSpan="6">
+    <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
+      <input type="text" nz-input [(ngModel)]="materialCode" placeholder="请输入料号" />
+    </nz-input-group>
+    <ng-template #suffixIconButton>
+      <button nz-button nzType="primary" nzSearch (click)="allAlloc()"><i nz-icon nzType="search"></i></button>
+    </ng-template>
+  </div>
+</div>
+
+<div nz-row>
+  <nz-table #basicTable [nzData]="allocationList" nzSize="middle" nzFrontPagination="false">
+    <thead>
+    <tr>
+      <th
+        nzShowCheckbox
+        [(nzChecked)]="isAllDisplayDataChecked"
+        [nzIndeterminate]="isIndeterminate"
+        (nzCheckedChange)="checkAll($event)"
+      ></th>
+      <th>#</th>
+      <th>订单号</th>
+      <th>行号</th>
+      <th>下单时间</th>
+      <th>客户</th>
+      <th>商品</th>
+      <th>分配数量</th>
+      <th>分配类型</th>
+      <th>分配时间</th>
+      <th>分配人</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let itm of basicTable.data; let i = index;">
+      <td nzShowCheckbox [(nzChecked)]="mapOfCheckedId[itm.id]" (nzCheckedChange)="refreshStatus()"></td>
+      <td>{{ i+1 }}</td>
+      <td>{{ itm.orderNum }}</td>
+      <td>{{ itm.itemSeq }}</td>
+      <td>{{ itm.placeDate }}</td>
+      <td>{{ itm.customerCode }}</td>
+      <td>{{ itm.materialCode }}</td>
+      <td>{{ itm.allocQty }}</td>
+      <td>{{ itm.allocType }}</td>
+      <td>{{ itm.allocDate }}</td>
+      <td>{{ itm.allocUser }}</td>
+    </tr>
+    </tbody>
+  </nz-table>
+</div>

@@ -41,14 +41,14 @@ export class StatsDataService {
 
   // 某一个提单数量的客户清单
   drillBySegment(segment: Number) {
-    const cmd = '/api/mxstats/segments' + segment;
+    const cmd = '/api/mxstats/custBySeg?p=' + segment;
     return this.http
                .get<Ret<string>>(cmd);
   }
 
   // 某个客户的提单清单
   drillByCust(cust: String) {
-    const cmd = '/api/mxstats/' + cust + '.';
+    const cmd = '/api/mxstats/findByCust?p=' + cust;
 
     return this.http
                .get<Ret<TxDetail>>(cmd);

@@ -4,19 +4,17 @@ import * as Chart from 'chart.js';
 
 import * as _ from 'lodash';
 
-import {IMyOptions} from 'mydatepicker';
-
 import { StatsDataService } from './stats.service';
 import { Segment } from './segment';
 import { TxDetail } from './txDetail';
 import { DailySales } from './dailySales';
 
 @Component({
-  // selector:    '',
-  templateUrl: './demo.component.html',
-  styleUrls:   ['./demo.component.scss']
+  selector:    'app-mxstats',
+  templateUrl: './mxstats.component.html',
+  styleUrls:   ['./mxstats.component.scss']
 })
-export class DemoComponent implements OnInit, AfterViewInit {
+export class MxstatsComponent implements OnInit, AfterViewInit {
   @ViewChild('lineChart') lineRef: ElementRef;
 
   details: TxDetail[];
@@ -45,20 +43,10 @@ export class DemoComponent implements OnInit, AfterViewInit {
   // 默认甜甜圈
   whichChart = 'doughnut';
 
-  // https://github.com/kekeh/mydatepicker
-  private myDatePickerOptions: IMyOptions = {
-    // other options...
-    dateFormat: 'yyyy.mm.dd',
-  };
-
-  // Initialized to specific date (09.10.2018).
-  // startDate: Object = { date: { year: 2018, month: 10, day: 9 } };
-  //
-  // searchRange: Object = {beginDate: {year: 2018, month: 10, day: 9},
-  //   endDate: {year: 2018, month: 10, day: 19}};
-
-  startDate = null;
   searchRange = [];
+
+  // 是否显示客户的订单列表
+  showDetails = false;
 
   constructor(private statsDataService: StatsDataService) {}
 
@@ -66,6 +54,8 @@ export class DemoComponent implements OnInit, AfterViewInit {
     this.selectedSegment  = 0;
     this.selectedCustomer = '';
     this.showDailySales = true;
+
+    this.showDetails = false;
 
     this.statsDataService.showSegments().subscribe(data => this.allSegs = data.items);
   }
@@ -81,15 +71,6 @@ export class DemoComponent implements OnInit, AfterViewInit {
     });
   }
 
-  getAllDetails(): void {
-    this.statsDataService.getAllDetails().subscribe(({items}) => this.details = items );
-  }
-  //
-  // listAllSegments(): void {
-  //   this.statsDataService.showSegments().subscribe(data => this.allSegs = data);
-  //   this.selectedSegment = 0;
-  // }
-
   drillBySegment(segment: number): void {
     this.selectedSegment = segment;
 
@@ -97,10 +78,13 @@ export class DemoComponent implements OnInit, AfterViewInit {
         .subscribe(data => {
           this.customers        = data.items;
           this.filteredCustomer = data.items;
-        });
 
-    this.selectedCustomer = '';
-    this.customerFilter   = '';
+
+          this.selectedCustomer = '';
+          this.customerFilter   = '';
+          this.showDetails = false;
+          this.selectedCustomer = '';
+        });
   }
 
   filterCustomer(filter: string): void {
@@ -116,7 +100,17 @@ export class DemoComponent implements OnInit, AfterViewInit {
   drillByCust(cust: string): void {
     this.selectedCustomer = cust;
 
-    this.statsDataService.drillByCust(this.selectedCustomer).subscribe(data => this.details = data.items);
+    this.statsDataService.drillByCust(this.selectedCustomer).subscribe(data => {
+      this.details = data.items;
+
+      this.showDetails = true;
+    });
+  }
+
+  backToList() : void {
+    this.showDetails = false;
+
+    this.selectedCustomer = '';
   }
 
   isCustomerSelected(cust: string): boolean {
@@ -128,11 +122,6 @@ export class DemoComponent implements OnInit, AfterViewInit {
     return (this.selectedSegment !== 0);
   }
 
-  // 是否有选中的客户
-  hasSelectedCustomer(): boolean {
-    return (this.selectedCustomer !== '');
-  }
-
   switchChart(target: string): void {
     this.whichChart = target;
 
@@ -141,11 +130,6 @@ export class DemoComponent implements OnInit, AfterViewInit {
 
   isCurrentChart(current: string): boolean {
     return current === this.whichChart;
-  }
-
-  fetchPrettySegs(segs: Segment[]) {
-    this.prettySegs = segs;
-    this.drawChart(this.prettySegs);
   }
 
   drawChart(chartSegs: Segment[]) {
@@ -248,7 +232,7 @@ export class DemoComponent implements OnInit, AfterViewInit {
       labels:   labels,
       datasets: [
         {
-          label:                     '提单数',
+          label:                     '订单数',
           fill:                      false,
           lineTension:               0.1,
           backgroundColor:           'rgba(75,192,192,0.4)',
@@ -270,7 +254,7 @@ export class DemoComponent implements OnInit, AfterViewInit {
           spanGaps:                  false,
         },
         {
-          label:                     '客户数',
+          label:                     '供应商数',
           fill:                      false,
           lineTension:               0.1,
           backgroundColor:           'rgba(275,192,192,0.4)',

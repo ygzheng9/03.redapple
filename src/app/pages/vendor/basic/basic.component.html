@@ -1,0 +1,38 @@
+<nz-card>
+  <nz-descriptions nzTitle="基本信息">
+    <nz-descriptions-item nzTitle="供应商名称">Zhou Maomao</nz-descriptions-item>
+    <nz-descriptions-item nzTitle="法人">Zhou Maomao</nz-descriptions-item>
+
+    <nz-descriptions-item nzTitle="成立时间">Zhou Maomao</nz-descriptions-item>
+    <nz-descriptions-item nzTitle="企业性质">Zhou Maomao</nz-descriptions-item>
+    <nz-descriptions-item nzTitle="注册资本(万)">Zhou Maomao</nz-descriptions-item>
+
+    <nz-descriptions-item nzTitle="工商注册号">18100000000</nz-descriptions-item>
+    <nz-descriptions-item nzTitle="税务登记证编号">18100000000</nz-descriptions-item>
+    <nz-descriptions-item nzTitle="组织机构代码">18100000000</nz-descriptions-item>
+
+    <nz-descriptions-item nzTitle="开户行">Zhou Maomao</nz-descriptions-item>
+    <nz-descriptions-item nzTitle="银行账号">18100000000</nz-descriptions-item>
+    <nz-descriptions-item nzTitle="资信等级">18100000000</nz-descriptions-item>
+
+    <nz-descriptions-item nzTitle="省份">18100000000</nz-descriptions-item>
+    <nz-descriptions-item nzTitle="城市">Hangzhou, Zhejiang</nz-descriptions-item>
+    <nz-descriptions-item nzTitle="地址">Empty</nz-descriptions-item>
+
+    <nz-descriptions-item nzTitle="联系人">Empty</nz-descriptions-item>
+    <nz-descriptions-item nzTitle="职位">Empty</nz-descriptions-item>
+    <nz-descriptions-item nzTitle="电话">Empty</nz-descriptions-item>
+    <nz-descriptions-item nzTitle="邮箱">Empty</nz-descriptions-item>
+
+    <nz-descriptions-item nzTitle="主营业务范围">Empty</nz-descriptions-item>
+  </nz-descriptions>
+</nz-card>
+
+<nz-list [nzDataSource]="data" nzBordered nzHeader="认证" [nzFooter]="null" [nzRenderItem]="defaultItem">
+  <ng-template #defaultItem let-item>
+    <nz-list-item>
+      <span class="ant-typography"><mark>[获得]</mark></span>
+      {{ item }}
+    </nz-list-item>
+  </ng-template>
+</nz-list>

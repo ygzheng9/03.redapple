@@ -1,0 +1,40 @@
+<div nz-row>
+  <div nz-col nzSpan="4">
+    <button nz-button>批量上载</button>
+  </div>
+  <div nz-col nzSpan="6">
+    <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
+      <input type="text" nz-input [(ngModel)]="materialCode" placeholder="请输入料号" />
+    </nz-input-group>
+    <ng-template #suffixIconButton>
+      <button nz-button nzType="primary" nzSearch (click)="getAllMovements()"><i nz-icon nzType="search"></i></button>
+    </ng-template>
+  </div>
+</div>
+
+<div nz-row>
+  <nz-table #basicTable [nzData]="movementList" nzSize="middle" nzFrontPagination="false">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>单号</th>
+      <th>行号</th>
+      <th>时间</th>
+      <th>移动类型</th>
+      <th>料号</th>
+      <th>数量</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let itm of basicTable.data; let i = index;">
+      <td>{{ i+1 }}</td>
+      <td>{{ itm.orderNum }}</td>
+      <td>{{ itm.itemSeq }}</td>
+      <td>{{ itm.movementDate }}</td>
+      <td>{{ itm.movementType }}</td>
+      <td>{{ itm.materialCode }}</td>
+      <td>{{ itm.movementQty }}</td>
+    </tr>
+    </tbody>
+  </nz-table>
+</div>

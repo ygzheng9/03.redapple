@@ -13,7 +13,11 @@ export class ListComponent implements OnInit {
   constructor(private orderSvc: OrderService) { }
 
   ngOnInit(): void {
+    console.log("list ngOnInit.");
+
     this.orderSvc.getBeer().subscribe(data => {
+      console.log(data);
+
       this.brews = data;
     });
   }

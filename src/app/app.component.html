@@ -7,12 +7,95 @@
             [nzTrigger]="null">
     <div class="sidebar-logo">
       <a target="_blank">
-        <img src="assets/ABCD.png" alt="logo" width="32px" height="32px">
+        <img src="assets/brain.png" alt="logo" width="28px" height="28px">
         <h1>METIS</h1>
       </a>
     </div>
     <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-      <li nz-submenu nzOpen nzTitle="项目管理" nzIcon="dashboard">
+      <li nz-submenu nzTitle="待办事项" nzIcon="check">
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/todo/open">当前事项</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/todo/close">已完事项</a>
+          </li>
+        </ul>
+      </li>
+      <li nz-submenu nzTitle="基础信息" nzIcon="setting">
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/mdm">客户信息</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/mdm">供应商信息</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/mdm">人员信息</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/mdm">物资信息</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/mdm">设备信息</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/mdm">会计科目</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/mdm">银行账户</a>
+          </li>
+        </ul>
+      </li>
+      <li nz-submenu nzTitle="商务管理" nzIcon="api">
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/fulfilment">商机管理</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/mdm">收入合同管理</a>
+          </li>
+
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/order">订单</a>
+          </li>
+
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/mdm">支出合同管理</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/mdm">工时管理</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/mdm">开票管理</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/mdm">资金回笼</a>
+          </li>
+        </ul>
+      </li>
+      <li nz-submenu nzOpen nzTitle="订单分配" nzIcon="project">
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/fulfilment/order">订单</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/fulfilment/alloc">配货</a>
+          </li>
+
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/fulfilment/completion">发货</a>
+          </li>
+
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/fulfilment/movement">出入库</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/fulfilment/inventoryLevel">库存</a>
+          </li>
+        </ul>
+      </li>
+      <li nz-submenu nzOpen nzTitle="项目管理" nzIcon="project">
         <ul>
           <li nz-menu-item nzMatchRouter>
             <a routerLink="/project/overview">项目概览</a>
@@ -25,14 +108,132 @@
           </li>
         </ul>
       </li>
+      <li nz-submenu nzTitle="业务报账" nzIcon="code">
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/mdm">费用类型</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/mdm">单据表单</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/mdm">专项预算</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/mdm">工程材料</a>
+          </li>
+        </ul>
+      </li>
+      <li nz-submenu nzTitle="供应链管理" nzIcon="container">
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/mdm">物资分类</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/mdm">需求计划</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/mxstats">采购订单</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/mdm">仓储管理</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/mdm">联储联备</a>
+          </li>
+          <li nz-menu-group nzTitle="供应商管理">
+            <ul>
+              <li nz-menu-item nzMatchRouter>
+                <a routerLink="/vendor/basic">基本信息</a>
+              </li>
+              <li nz-menu-item nzMatchRouter>
+                <a routerLink="/vendor/transaction">当前交易</a>
+              </li>
+              <li nz-menu-item nzMatchRouter>
+                <a routerLink="/vendor/txhistory">历史交易</a>
+              </li>
+              <li nz-menu-item nzMatchRouter>
+                <a routerLink="/vendor/performance">绩效评价</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+
+      <li nz-submenu nzTitle="设备管理" nzIcon="eye">
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/mdm">设备管理</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/mdm">设备资产映射</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/mdm">设备功能位置</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/mdm">计划性维护</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/mdm">维护结算</a>
+          </li>
+        </ul>
+      </li>
+
+      <li nz-submenu nzTitle="财务核算" nzIcon="database">
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/mdm">项目预算</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/mdm">竣工决算</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/mdm">固定资产</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/mdm">投融资</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/mdm">资金结算</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/mdm">综合信息</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/mdm">合并报表</a>
+          </li>
+        </ul>
+      </li>
+
+      <li nz-submenu nzTitle="售后服务" nzIcon="control">
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/mdm">安装记录</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/mdm">服务请求</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/mdm">任务分派</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/mdm">现场服务</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/mdm">费用结算</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/mdm">客户回访</a>
+          </li>
+        </ul>
+      </li>
+
       <div *ngIf="false">
       <li nz-submenu nzOpen nzTitle="Dashboard" nzIcon="dashboard">
         <ul>
           <li nz-menu-item nzMatchRouter>
             <a routerLink="/welcome">Welcome</a>
-          </li>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/mxstats">MxStats</a>
           </li>
         </ul>
       </li>
@@ -45,8 +246,6 @@
       </li>
       </div>
     </ul>
-
-
   </nz-sider>
   <nz-layout>
     <nz-header>

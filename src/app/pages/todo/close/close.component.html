@@ -1,0 +1,53 @@
+<form nz-form [nzLayout]="'inline'" [formGroup]="searchForm" (ngSubmit)="submitForm()">
+  <nz-form-item>
+    <nz-form-control nzErrorTip="Please input date range!">
+      <nz-input-group nzPrefixIcon="clock-circle">
+        <nz-range-picker formControlName="taskRange"></nz-range-picker>
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control nzErrorTip="Please input your search content!">
+      <nz-input-group nzPrefixIcon="edit">
+        <input formControlName="searchText" nz-input placeholder="" />
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control>
+      <button nz-button nzType="default" nzShape="circle"><i nz-icon nzType="search"></i></button>
+    </nz-form-control>
+  </nz-form-item>
+</form>
+
+
+<nz-table #basicTable [nzData]="tasks" nzSize="middle">
+  <thead>
+  <tr>
+    <th>#</th>
+    <th>事项</th>
+    <th>来源</th>
+    <th>责任人</th>
+    <th>要求日期</th>
+    <th>指派日期</th>
+    <th>状态</th>
+    <th>更新日期</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of basicTable.data">
+    <td>{{ data.key }}</td>
+    <td>{{ data.description }}</td>
+    <td>{{ data.refBiz }}</td>
+    <td>{{ data.owner }}</td>
+    <td>{{ data.planDate }}</td>
+    <td>{{ data.assignDate }}</td>
+    <td>{{ '已完成' }}</td>
+    <td>{{ data.updateDate }}</td>
+    <td>
+      <a>详情</a>
+    </td>
+  </tr>
+  </tbody>
+</nz-table>

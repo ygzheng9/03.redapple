@@ -6,8 +6,8 @@
 
 export interface TxDetail {
   id: number;
-  bizDate: Date;
-  bizTime: string;
-  blNumber: string;
-  custName: string;
+  biz_date: Date;
+  biz_time: string;
+  bl_num: string;
+  cust_nme: string;
 }
